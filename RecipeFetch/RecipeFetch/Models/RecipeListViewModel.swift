@@ -12,19 +12,18 @@ class RecipeListViewModel: ObservableObject {
     
     @Published var recipes = [RecipeViewModel]()
     
-    func getRecipes() {
+    
+    func getRecipess() async {
         
-        NetworkManager().fetchRecipes( url: URLS.recipeUrl) { result in
-            switch result {
-            case .success(let recipes):
-                DispatchQueue.main.async {
-                    self.recipes = recipes.map(RecipeViewModel.init)
-                }
-            case .failure(let error):
-                print(error)
+        do {
+            let recipes = try await NetworkManager().fetchRecipes(url: URLS.recipeUrl)
+            DispatchQueue.main.async {
+                self.recipes = recipes.map(RecipeViewModel.init)
             }
+        } catch {
+            print(error)
         }
-        
     }
     
+
 }

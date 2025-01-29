@@ -15,25 +15,16 @@ enum NetworkError: Error {
 
 class NetworkManager {
     
-    func fetchRecipes(url: URL?, completion: @escaping (Result<[Recipe], NetworkError>) -> Void) {
+    func fetchRecipes(url: URL?) async throws -> [Recipe] {
         
         guard let url = url else {
-            completion(.failure(.badAddress))
-            return
+            return []
         }
             
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            
-            guard let data = data, error == nil else {
-                completion(.failure(.invalidData))
-                return
-            }
-            
-            let recipeResponse = try? JSONDecoder().decode(RecipeResponse.self, from: data)
-            completion(.success(recipeResponse?.recipes ?? []))
-            
-        }.resume()
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let recipeResponse = try? JSONDecoder().decode(RecipeResponse.self, from: data)
+        return recipeResponse?.recipes ?? []
         
     }
-    
+
 }

@@ -20,8 +20,11 @@ struct RecipeListView: View {
                 RecipeCell(recipe: recipe)
         }
         .listStyle(.plain)
+        .task({
+            await recipeListViewModel.getRecipess()
+        })
         .onAppear {
-            recipeListViewModel.getRecipes()
+            
         }
         .navigationTitle("Recipe Fetch")
         }
