@@ -44,8 +44,16 @@ struct RecipeViewModel {
         recipe.source_url ?? ""
     }
     
+    var sourceURL: URL? {
+        URL(string: self.source_url) ?? nil
+    }
+    
     var youtube_url: String {
         recipe.youtube_url ?? ""
+    }
+    
+    var youTubeURL: URL? {
+        URL(string: self.youtube_url) ?? nil
     }
     
 }
