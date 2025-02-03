@@ -12,6 +12,7 @@ struct RecipeScrollView: View {
     @StateObject private var recipeListViewModel = RecipeListViewModel()
    
     var body: some View {
+      
         var recipes = recipeListViewModel.recipes
         NavigationView {
             ScrollView {
