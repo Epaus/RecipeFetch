@@ -79,33 +79,48 @@ struct RecipeCell: View {
                 .navigationTitle("Recipe Fetch")
             
             if isExpanded {
-               
+               Spacer()
                 HStack(spacing: UIScreen.main.bounds.width * 0.30) {
-                  
-                    if recipe.sourceURL != nil {
+                    let hasRecipeSource = recipe.sourceURL != nil
+                    if hasRecipeSource {
                         Button("Go to recipe") {
                             openURL(recipe.sourceURL!)
                         }.padding(.leading, 10)
+                    } else {
+                        Button("Go to recipe") {
+                        }.disabled(!hasRecipeSource)
                     }
                     
                     if recipe.youTubeURL != nil {
                         Button(action: {
                             openURL(recipe.youTubeURL!)
                         }){
-                                    Image(systemName: "play.fill")
-                                .frame(width: 55, height: 35)
-                                        .foregroundColor(Color.white)
-                                        .background(Color.red)
-                                        .clipShape(RoundedRectangle(cornerRadius: 8.0))
+                            PlayVideoImage()
                                 }.buttonStyle(PlainButtonStyle())
                             .frame(maxWidth: 50.0, maxHeight: 50.0, alignment: .trailing)
                             .padding(.trailing, 10)
+                    } else {
+                        Button(action: {}){
+                            PlayVideoImage()
+                                }.buttonStyle(PlainButtonStyle())
+                            .frame(maxWidth: 50.0, maxHeight: 50.0, alignment: .trailing)
+                            .padding(.trailing, 10).disabled(true)
                     }
                    
                 }
                 
             }
         }
+    }
+}
+
+struct PlayVideoImage: View {
+    var body: some View {
+        Image(systemName: "play.fill")
+            .frame(width: 55, height: 35)
+            .foregroundColor(Color.white)
+            .background(Color.red)
+            .clipShape(RoundedRectangle(cornerRadius: 8.0))
     }
 }
 
