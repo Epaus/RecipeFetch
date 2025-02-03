@@ -25,7 +25,7 @@ struct RecipeFetchApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RecipeListView()
+            RecipeScrollView()
         }
     }
 }

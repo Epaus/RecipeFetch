@@ -11,7 +11,8 @@ struct RecipeResponse: Decodable {
     let recipes: [Recipe]
 }
 
-struct Recipe: Decodable {
+struct Recipe: Decodable, Hashable  {
+   
     let cuisine: String?
     let name: String?
     let photo_url_large: String?

@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct RecipeViewModel {
+struct RecipeViewModel:  Hashable {
+   
+    
     
     
     let recipe: Recipe
