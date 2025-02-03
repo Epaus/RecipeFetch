@@ -13,24 +13,28 @@ struct RecipeScrollView: View {
    
     var body: some View {
         var recipes = recipeListViewModel.recipes
-        ScrollView {
-            ForEach(recipes, id: \.uuid) { recipe in
-                RecipeCell(recipe: recipe, isExpanded: self.selectedCells.contains(recipe))
-                    .modifier(ScrollCell())
-                    .onTapGesture {
-                        if self.selectedCells.contains(recipe) {
-                            self.selectedCells.remove(recipe)
-                        } else {
-                            self.selectedCells.insert(recipe)
+        NavigationView {
+            ScrollView {
+                ForEach(recipes, id: \.uuid) { recipe in
+                    RecipeCell(recipe: recipe, isExpanded: self.selectedCells.contains(recipe))
+                        .modifier(ScrollCell())
+                        .onTapGesture {
+                            if self.selectedCells.contains(recipe) {
+                                self.selectedCells.remove(recipe)
+                            } else {
+                                self.selectedCells.insert(recipe)
+                            }
                         }
-                    }
-                    .animation(.easeInOut(duration: 0.3))
-                    .padding(.vertical, 2)
-            } .task({
-                await recipeListViewModel.getRecipess()
-            })
-        } .frame(maxWidth: .infinity)
-            .padding(.top, 10)
+                        .animation(.easeInOut, value: 0.3)
+                        .padding(.vertical, 2)
+                } .task({
+                    await recipeListViewModel.getRecipess()
+                })
+            } .frame(maxWidth: .infinity)
+                .padding(.top, 10)
+
+        } .navigationBarTitle("Recipe Fetch", displayMode: .large)
+           
     }
 }
 
@@ -39,14 +43,11 @@ struct RecipeCell: View {
     let recipe: RecipeViewModel
     let isExpanded: Bool
     
-    @State var youTubeTapped = false
-    @State var recipeSourceTapped = false
-    
     @Environment(\.openURL) private var openURL
     
     var body: some View {
         VStack {
-            HStack {
+            HStack (alignment: .top) {
                 AsyncImage(url: recipe.photo_url_small) { image in
                     image.resizable()
                         .frame(maxWidth: 100, maxHeight: 100)
@@ -55,15 +56,17 @@ struct RecipeCell: View {
                         .frame(maxWidth: 100, maxHeight: 100)
                 }.padding(.leading, 10)
                 
-                VStack {
+                VStack  {
                     Text(recipe.name)
                         .font(.headline)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .frame(maxWidth: UIScreen.main.bounds.width * 0.8, maxHeight: UIScreen.main.bounds.height * 0.1, alignment: .leading)
                         .multilineTextAlignment(.leading)
                         .lineLimit(nil)
+                        
                     Text(recipe.cuisine)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .frame(maxWidth: .infinity, maxHeight: 20.0, alignment: .leading)
                         .italic()
+                    Spacer()
                 }
                 
                 
@@ -71,30 +74,26 @@ struct RecipeCell: View {
                 Spacer()
                 
                 Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                // .font(system(size: 22, weight: .regular))
-                    .padding(.trailing, 10)
+                .padding(.trailing, 16)
             } .contentShape(Rectangle())
                 .navigationTitle("Recipe Fetch")
             
             if isExpanded {
-                HStack  {
+               
+                HStack(spacing: UIScreen.main.bounds.width * 0.30) {
+                  
                     if recipe.sourceURL != nil {
                         Button("Go to recipe") {
-                            print("recipeSource tapped")
-                            recipeSourceTapped = true
-
                             openURL(recipe.sourceURL!)
                         }.padding(.leading, 10)
                     }
-                    Spacer()
+                    
                     if recipe.youTubeURL != nil {
                         Button(action: {
-                           youTubeTapped = true
                             openURL(recipe.youTubeURL!)
-                           print("tapped youtube button")
                         }){
                                     Image(systemName: "play.fill")
-                                .frame(width: 50, height: 50)
+                                .frame(width: 55, height: 35)
                                         .foregroundColor(Color.white)
                                         .background(Color.red)
                                         .clipShape(RoundedRectangle(cornerRadius: 8.0))
@@ -102,21 +101,11 @@ struct RecipeCell: View {
                             .frame(maxWidth: 50.0, maxHeight: 50.0, alignment: .trailing)
                             .padding(.trailing, 10)
                     }
+                   
                 }
-            }
-
-        }
-        
-        
-
-                        
-
-                        
-                        
-                        
                 
-            Spacer()
-        
+            }
+        }
     }
 }
 
