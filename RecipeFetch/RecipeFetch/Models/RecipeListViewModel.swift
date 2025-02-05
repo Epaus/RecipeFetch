@@ -11,7 +11,7 @@ import Foundation
 class RecipeListViewModel: ObservableObject {
     
     @Published var recipes = [RecipeViewModel]()
-    
+   
     
     func getRecipess() async {
         
@@ -41,4 +41,27 @@ class RecipeListViewModel: ObservableObject {
         return recipes.sorted { $0.youtube_url != "" && $1.youtube_url == ""}
     }
 
+}
+import SwiftUI
+import Combine
+
+class SearchViewModel: ObservableObject {
+    @Published var searchTerm: String = ""
+    @Published var items: [String] = ["Apple", "Banana", "Orange", "Grape"]
+    @Published var filteredItems: [String] = []
+
+    private var cancellables: Set<AnyCancellable> = []
+
+    init() {
+        $searchTerm
+            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+            .sink { [weak self] searchTerm in
+                self?.filterItems(searchTerm: searchTerm)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func filterItems(searchTerm: String) {
+        filteredItems = searchTerm.isEmpty ? items : items.filter { $0.lowercased().contains(searchTerm.lowercased()) }
+    }
 }

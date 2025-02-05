@@ -12,11 +12,11 @@ struct RecipeScrollView: View {
     @StateObject private var recipeListViewModel = RecipeListViewModel()
    
     var body: some View {
-      
-        var recipes = recipeListViewModel.recipes
+        
         NavigationView {
+            
             ScrollView {
-                ForEach(recipes, id: \.uuid) { recipe in
+                ForEach(recipeListViewModel.recipes, id: \.uuid) { recipe in
                     RecipeCell(recipe: recipe, isExpanded: self.selectedCells.contains(recipe))
                         .modifier(ScrollCell())
                         .onTapGesture {
@@ -33,9 +33,44 @@ struct RecipeScrollView: View {
                 })
             } .frame(maxWidth: .infinity)
                 .padding(.top, 10)
-
+                .toolbar {
+                    Menu {
+                        Button {
+                            recipeListViewModel.recipes = recipeListViewModel.sortRecipesByName()
+                        } label: {
+                            Label("Name", systemImage: "scribble")
+                        }
+                        Button {
+                            recipeListViewModel.recipes = recipeListViewModel.sortRecipesByCuisine()
+                            print("sorted by cuisine button tapped")
+                        } label: {
+                            Label("Cuisine", systemImage: "flag.circle")
+                        }
+                        Button {
+                            recipeListViewModel.recipes = recipeListViewModel.sortRecipesByHasRecipe()
+                        } label: {
+                            Label("Includes recipe link", systemImage: "list.clipboard")
+                        }
+                        Button {
+                            recipeListViewModel.recipes = recipeListViewModel.sortRecipesByHasVideo()
+                        } label: {
+                            Label("Includes video link", systemImage: "video.circle")
+                        }
+                    } label: {
+                        Label("Sort", systemImage: "filter")
+                            .padding()
+                            .background(Color.pink)
+                                    .cornerRadius(8)
+                                    .shadow(color: .black, radius: 30, x: 15, y: 15)
+                                    .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.30)
+                    }
+                  Spacer()
+                    
+                }
+            
         } .navigationBarTitle("Recipe Fetch", displayMode: .large)
-           
+        
+        
     }
 }
 
@@ -63,7 +98,7 @@ struct RecipeCell: View {
                         .frame(maxWidth: UIScreen.main.bounds.width * 0.8, maxHeight: UIScreen.main.bounds.height * 0.1, alignment: .leading)
                         .multilineTextAlignment(.leading)
                         .lineLimit(nil)
-                        
+                    
                     Text(recipe.cuisine)
                         .frame(maxWidth: .infinity, maxHeight: 20.0, alignment: .leading)
                         .italic()
@@ -75,12 +110,12 @@ struct RecipeCell: View {
                 Spacer()
                 
                 Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                .padding(.trailing, 16)
+                    .padding(.trailing, 16)
             } .contentShape(Rectangle())
                 .navigationTitle("Recipe Fetch")
             
             if isExpanded {
-               Spacer()
+                Spacer()
                 HStack(spacing: UIScreen.main.bounds.width * 0.30) {
                     let hasRecipeSource = recipe.sourceURL != nil
                     if hasRecipeSource {
@@ -97,17 +132,17 @@ struct RecipeCell: View {
                             openURL(recipe.youTubeURL!)
                         }){
                             PlayVideoImage()
-                                }.buttonStyle(PlainButtonStyle())
+                        }.buttonStyle(PlainButtonStyle())
                             .frame(maxWidth: 50.0, maxHeight: 50.0, alignment: .trailing)
                             .padding(.trailing, 10)
                     } else {
                         Button(action: {}){
                             PlayVideoImage()
-                                }.buttonStyle(PlainButtonStyle())
+                        }.buttonStyle(PlainButtonStyle())
                             .frame(maxWidth: 50.0, maxHeight: 50.0, alignment: .trailing)
                             .padding(.trailing, 10).disabled(true)
                     }
-                   
+                    
                 }
                 
             }
