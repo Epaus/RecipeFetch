@@ -13,19 +13,6 @@ class RecipeListViewModel: ObservableObject {
     @Published var recipes = [RecipeViewModel]()
     @Published private var cancellables: Set<AnyCancellable> = []
     
-    func getRecipess() async {
-        
-        do {
-            let recipes = try await NetworkManager().fetchRecipes(url: URLS.recipeUrl)
-            DispatchQueue.main.async {
-                self.recipes = recipes.map(RecipeViewModel.init)
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
-   
     
     func sortRecipesByCuisine()  {
         self.recipes = recipes.sorted { $0.cuisine < $1.cuisine }

@@ -13,7 +13,7 @@ struct RecipeScrollView: View {
     @StateObject private var recipeListViewModel = RecipeListViewModel()
     @State private var cancellables: Set<AnyCancellable> = []
     
-    private func loadRecipes() {
+    private func loadRecipes() async {
         NetworkManager().newFetchRecipes(url: URLS.recipeUrl)
             .sink { data  in
             } receiveValue: { recipes in
@@ -51,7 +51,7 @@ struct RecipeScrollView: View {
                         .animation(.easeInOut, value: 0.3)
                         .padding(.vertical, 2)
                 } .task({
-                    loadRecipes()
+                    await loadRecipes()
                 })
             } .frame(maxWidth: .infinity)
                 .padding(.top, 10)
