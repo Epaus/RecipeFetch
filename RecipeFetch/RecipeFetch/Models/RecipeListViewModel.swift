@@ -6,13 +6,29 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 class RecipeListViewModel: ObservableObject {
     
     @Published var recipes = [RecipeViewModel]()
     @Published private var cancellables: Set<AnyCancellable> = []
+    @Published var searchTerm: String = ""
+    @Published var isSearching = false
+   
     
+    var filteredRecipes: [RecipeViewModel] = []
+    
+    init() {
+        $searchTerm
+            //.debounce(for: 0.25, scheduler: DispatchQueue.main)
+            .map { searchTerm -> Void  in
+                //self.isSearching = true
+                self.filterRecipes(searchTerm: searchTerm)
+            }
+            .sink {}
+            .store(in: &cancellables)
+    }
     
     func sortRecipesByCuisine()  {
         self.recipes = recipes.sorted { $0.cuisine < $1.cuisine }
@@ -29,28 +45,8 @@ class RecipeListViewModel: ObservableObject {
     func sortRecipesByHasVideo() {
         self.recipes =  recipes.sorted { $0.youtube_url != "" && $1.youtube_url == ""}
     }
-
-}
-import SwiftUI
-import Combine
-
-class SearchViewModel: ObservableObject {
-    @Published var searchTerm: String = ""
-    @Published var items: [String] = ["Apple", "Banana", "Orange", "Grape"]
-    @Published var filteredItems: [String] = []
-
-    private var cancellables: Set<AnyCancellable> = []
-
-    init() {
-        $searchTerm
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
-            .sink { [weak self] searchTerm in
-                self?.filterItems(searchTerm: searchTerm)
-            }
-            .store(in: &cancellables)
-    }
-
-    private func filterItems(searchTerm: String) {
-        filteredItems = searchTerm.isEmpty ? items : items.filter { $0.lowercased().contains(searchTerm.lowercased()) }
+    
+    func filterRecipes(searchTerm: String) {
+        self.recipes = searchTerm.isEmpty ? self.recipes : recipes.filter { $0.name.lowercased().contains(searchTerm.lowercased()) }
     }
 }

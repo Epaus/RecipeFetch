@@ -8,11 +8,13 @@
 import SwiftUI
 import Combine
 
+
+
 struct RecipeScrollView: View {
     @State private var selectedCells: Set<RecipeViewModel> = []
     @StateObject private var recipeListViewModel = RecipeListViewModel()
     @State private var cancellables: Set<AnyCancellable> = []
-    
+    @Environment(\.isSearching) var isSearching
     private func loadRecipes() async {
         NetworkManager().newFetchRecipes(url: URLS.recipeUrl)
             .sink { data  in
@@ -31,16 +33,16 @@ struct RecipeScrollView: View {
                     RecipeCell(recipe: recipe, isExpanded: self.selectedCells.contains(recipe))
                         .modifier(ScrollCell())
                         .onTapGesture {
-                        
+                            
                             if self.selectedCells.contains(recipe) {
-                               
+                                
                                 self.selectedCells.forEach( { cell in
                                     print(cell.name)
                                 })
                                 print("selectedCells.count = \(self.selectedCells.count)")
                                 self.selectedCells.remove(recipe)
                             } else {
-                               
+                                
                                 self.selectedCells.insert(recipe)
                                 self.selectedCells.forEach( { cell in
                                     print(cell.name)
@@ -63,7 +65,7 @@ struct RecipeScrollView: View {
                             Label("Name", systemImage: "scribble")
                         }
                         Button {
-                             recipeListViewModel.sortRecipesByCuisine()
+                            recipeListViewModel.sortRecipesByCuisine()
                             print("sorted by cuisine button tapped")
                         } label: {
                             Label("Cuisine", systemImage: "flag.circle")
@@ -82,18 +84,33 @@ struct RecipeScrollView: View {
                         Label("Sort", systemImage: "filter")
                             .padding()
                             .background(Color.pink)
-                                    .cornerRadius(8)
-                                    .shadow(color: .black, radius: 30, x: 15, y: 15)
-                                    .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.30)
+                            .cornerRadius(8)
+                            .shadow(color: .black, radius: 30, x: 15, y: 15)
+                            .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.30)
                     }
-                  Spacer()
+                    Spacer()
                     
                 }
             
         } .navigationBarTitle("Recipe Fetch", displayMode: .large)
-        
-        
+            .searchable(text: $recipeListViewModel.searchTerm)
+            .onSubmit(of:.search){
+//                recipeListViewModel.filterRecipes(searchTerm: recipeListViewModel.searchTerm)
+                if recipeListViewModel.searchTerm.isEmpty && isSearching {
+                    Task { await loadRecipes() }
+                } else {
+                    recipeListViewModel.filterRecipes(searchTerm: recipeListViewModel.searchTerm)
+                }
+                
+            }
+            .onChange(of: recipeListViewModel.searchTerm) {
+                if recipeListViewModel.searchTerm.isEmpty && !isSearching {
+                    Task { await loadRecipes() }
+                }
+                
+            }
     }
+           
 }
 
 struct RecipeCell: View {
@@ -102,7 +119,7 @@ struct RecipeCell: View {
     let isExpanded: Bool
     
     @Environment(\.openURL) private var openURL
-    
+   
     var body: some View {
         VStack {
             HStack (alignment: .top) {
