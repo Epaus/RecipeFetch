@@ -8,9 +8,10 @@
 import Foundation
 
 struct RecipeViewModel:  Hashable {
-   
     
-    
+    init(recipe: Recipe) {
+        self.recipe = recipe
+    }
     
     let recipe: Recipe
     
@@ -39,7 +40,7 @@ struct RecipeViewModel:  Hashable {
     }
     
     var uuid: String {
-        recipe.uuid ?? ""
+        recipe.uuid
     }
     
     var source_url: String {

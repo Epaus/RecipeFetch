@@ -11,13 +11,15 @@ struct RecipeResponse: Decodable {
     let recipes: [Recipe]
 }
 
-struct Recipe: Decodable, Hashable  {
-   
+struct Recipe: Identifiable, Decodable, Hashable  {
+    var id: String {
+        uuid
+    }
     let cuisine: String?
     let name: String?
     let photo_url_large: String?
     let photo_url_small: String?
-    let uuid: String?
+    let uuid: String
     let source_url: String?
     let youtube_url: String?
 }

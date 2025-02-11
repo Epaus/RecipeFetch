@@ -6,10 +6,21 @@
 //
 
 import SwiftUI
+import Combine
 
 struct RecipeScrollView: View {
     @State private var selectedCells: Set<RecipeViewModel> = []
     @StateObject private var recipeListViewModel = RecipeListViewModel()
+    @State private var cancellables: Set<AnyCancellable> = []
+    
+    private func loadRecipes() {
+        NetworkManager().newFetchRecipes(url: URLS.recipeUrl)
+            .sink { data  in
+            } receiveValue: { recipes in
+                self.recipeListViewModel.recipes = recipes
+            }.store(in: &cancellables)
+
+    }
    
     var body: some View {
         
@@ -20,39 +31,50 @@ struct RecipeScrollView: View {
                     RecipeCell(recipe: recipe, isExpanded: self.selectedCells.contains(recipe))
                         .modifier(ScrollCell())
                         .onTapGesture {
+                        
                             if self.selectedCells.contains(recipe) {
+                               
+                                self.selectedCells.forEach( { cell in
+                                    print(cell.name)
+                                })
+                                print("selectedCells.count = \(self.selectedCells.count)")
                                 self.selectedCells.remove(recipe)
                             } else {
+                               
                                 self.selectedCells.insert(recipe)
+                                self.selectedCells.forEach( { cell in
+                                    print(cell.name)
+                                })
+                                print("selectedCells.count = \(self.selectedCells.count)")
                             }
                         }
                         .animation(.easeInOut, value: 0.3)
                         .padding(.vertical, 2)
                 } .task({
-                    await recipeListViewModel.getRecipess()
+                    loadRecipes()
                 })
             } .frame(maxWidth: .infinity)
                 .padding(.top, 10)
                 .toolbar {
                     Menu {
                         Button {
-                            recipeListViewModel.recipes = recipeListViewModel.sortRecipesByName()
+                            recipeListViewModel.sortRecipesByName()
                         } label: {
                             Label("Name", systemImage: "scribble")
                         }
                         Button {
-                            recipeListViewModel.recipes = recipeListViewModel.sortRecipesByCuisine()
+                             recipeListViewModel.sortRecipesByCuisine()
                             print("sorted by cuisine button tapped")
                         } label: {
                             Label("Cuisine", systemImage: "flag.circle")
                         }
                         Button {
-                            recipeListViewModel.recipes = recipeListViewModel.sortRecipesByHasRecipe()
+                            recipeListViewModel.sortRecipesByHasRecipe()
                         } label: {
                             Label("Includes recipe link", systemImage: "list.clipboard")
                         }
                         Button {
-                            recipeListViewModel.recipes = recipeListViewModel.sortRecipesByHasVideo()
+                            recipeListViewModel.sortRecipesByHasVideo()
                         } label: {
                             Label("Includes video link", systemImage: "video.circle")
                         }
