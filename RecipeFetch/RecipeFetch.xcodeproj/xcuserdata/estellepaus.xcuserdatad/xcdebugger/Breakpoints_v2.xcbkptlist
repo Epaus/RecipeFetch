@@ -44,8 +44,8 @@
             filePath = "RecipeFetch/Models/RecipeListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "sortRecipesByCuisine()"
             landmarkType = "7">
          </BreakpointContent>
@@ -60,8 +60,8 @@
             filePath = "RecipeFetch/Views/RecipeScrollView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -76,9 +76,9 @@
             filePath = "RecipeFetch/Network/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "newFetchRecipes(url:)"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "fetchRecipes(url:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -92,8 +92,8 @@
             filePath = "RecipeFetch/Views/RecipeScrollView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -108,8 +108,8 @@
             filePath = "RecipeFetch/Views/RecipeScrollView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -124,8 +124,8 @@
             filePath = "RecipeFetch/Views/RecipeScrollView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -156,8 +156,8 @@
             filePath = "RecipeFetch/Views/RecipeScrollView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "body"
             landmarkType = "24">
             <Actions>
@@ -171,7 +171,7 @@
             </Actions>
             <Locations>
                <Location
-                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - f9311245cda057a1"
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - f9311245cda05699"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -181,11 +181,11 @@
                   urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101">
+                  startingLineNumber = "93"
+                  endingLineNumber = "93">
                </Location>
                <Location
-                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - 8eea3fd05960cca6"
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - 8eea3fd05960cd9e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -195,11 +195,11 @@
                   urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101">
+                  startingLineNumber = "93"
+                  endingLineNumber = "93">
                </Location>
                <Location
-                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - 45afb4d154be8647"
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - 45afb4d154be877f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -209,11 +209,11 @@
                   urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101">
+                  startingLineNumber = "93"
+                  endingLineNumber = "93">
                </Location>
                <Location
-                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - e9bd37ed3617e352"
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - e9bd37ed3617e26a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -223,11 +223,11 @@
                   urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101">
+                  startingLineNumber = "93"
+                  endingLineNumber = "93">
                </Location>
                <Location
-                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - f4519f2dc4b47a49"
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - f4519f2dc4b47b71"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -237,35 +237,10 @@
                   urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101">
+                  startingLineNumber = "93"
+                  endingLineNumber = "93">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5559917B-51DD-4B35-9D27-D7500DE50ED9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "Yes"
-            filePath = "RecipeFetch/Views/RecipeScrollView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "loadRecipes()"
-            landmarkType = "7">
-            <Actions>
-               <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.Log">
-                  <ActionContent
-                     message = "EWP --&gt;&gt; sink in loadRecipes"
-                     conveyanceType = "0">
-                  </ActionContent>
-               </BreakpointActionProxy>
-            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

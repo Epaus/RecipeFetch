@@ -15,15 +15,7 @@ struct RecipeScrollView: View {
     @StateObject private var recipeListViewModel = RecipeListViewModel()
     @State private var cancellables: Set<AnyCancellable> = []
     @Environment(\.isSearching) var isSearching
-    private func loadRecipes() async {
-        NetworkManager().newFetchRecipes(url: URLS.recipeUrl)
-            .sink { data  in
-                recipeListViewModel.filterRecipes(searchTerm: recipeListViewModel.searchTerm)
-            } receiveValue: { recipes in
-                self.recipeListViewModel.recipes = recipes
-            }.store(in: &cancellables)
-
-    }
+    
    
     var body: some View {
         
@@ -54,7 +46,7 @@ struct RecipeScrollView: View {
                         .animation(.easeInOut, value: 0.3)
                         .padding(.vertical, 2)
                 } .task({
-                    await loadRecipes()
+                    await self.recipeListViewModel.loadRecipes()
                 })
             } .frame(maxWidth: .infinity)
                 .padding(.top, 10)
@@ -89,6 +81,7 @@ struct RecipeScrollView: View {
                             .shadow(color: .black, radius: 30, x: 15, y: 15)
                             .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.30)
                     }
+
                     Spacer()
                     
                 }
@@ -96,15 +89,14 @@ struct RecipeScrollView: View {
         } .navigationBarTitle("Recipe Fetch", displayMode: .large)
             .searchable(text: $recipeListViewModel.searchTerm)
             .onSubmit(of:.search){
-//                recipeListViewModel.filterRecipes(searchTerm: recipeListViewModel.searchTerm)
                 if isSearching {
-                    Task { await loadRecipes() }
-                } 
+                    Task { await self.recipeListViewModel.loadRecipes() }
+                }
                 
             }
             .onChange(of: recipeListViewModel.searchTerm) {
                 if recipeListViewModel.searchTerm.isEmpty && !isSearching {
-                    Task { await loadRecipes() }
+                    Task { await self.recipeListViewModel.loadRecipes() }
                 }
                 
             }
@@ -122,13 +114,14 @@ struct RecipeCell: View {
     var body: some View {
         VStack {
             HStack (alignment: .top) {
-                AsyncImage(url: recipe.photo_url_small) { image in
-                    image.resizable()
-                        .frame(maxWidth: 100, maxHeight: 100)
-                } placeholder: {
-                    ProgressView("Loading...")
-                        .frame(maxWidth: 100, maxHeight: 100)
-                }.padding(.leading, 10)
+                AsyncCachedImage(url: recipe.photo_url_small) { image in
+                            image
+                                .resizable()
+                                .frame(maxWidth: 100, maxHeight: 100)
+                        } placeholder: {
+                            ProgressView("Loading...")
+                            .frame(maxWidth: 100, maxHeight: 100)
+                        }.padding(.leading, 10)
                 
                 VStack  {
                     Text(recipe.name)
@@ -142,9 +135,6 @@ struct RecipeCell: View {
                         .italic()
                     Spacer()
                 }
-                
-                
-                
                 Spacer()
                 
                 Image(systemName: isExpanded ? "chevron.up" : "chevron.down")

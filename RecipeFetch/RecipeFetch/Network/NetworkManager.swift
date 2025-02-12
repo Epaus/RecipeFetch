@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 enum NetworkError: Error {
     case badAddress
@@ -22,20 +23,7 @@ enum HTTPError: LocalizedError {
 
 class NetworkManager {
     
-    func fetchRecipes(url: URL?) async throws -> [Recipe] {
-        
-      
-        guard let url = url else {
-            return []
-        }
-        
-        let (data, _) = try await URLSession.shared.data(from: url)
-        let recipeResponse = try? JSONDecoder().decode(RecipeResponse.self, from: data)
-        return recipeResponse?.recipes ?? []
-        
-    }
-    
-    func newFetchRecipes(url: URL?) -> AnyPublisher<[RecipeViewModel], Error>  {
+    func fetchRecipes(url: URL?) -> AnyPublisher<[RecipeViewModel], Error>  {
         guard let url = url else {
             return Fail(error: NetworkError.badAddress).eraseToAnyPublisher()
         }
@@ -56,6 +44,5 @@ class NetworkManager {
             }
             .eraseToAnyPublisher()
     }
-    
 }
 
