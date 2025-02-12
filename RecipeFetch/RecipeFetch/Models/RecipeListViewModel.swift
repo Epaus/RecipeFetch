@@ -14,20 +14,26 @@ class RecipeListViewModel: ObservableObject {
     @Published var recipes = [RecipeViewModel]()
     @Published private var cancellables: Set<AnyCancellable> = []
     @Published var searchTerm: String = ""
-    @Published var isSearching = false
-   
-    
-    var filteredRecipes: [RecipeViewModel] = []
+ 
     
     init() {
         $searchTerm
             //.debounce(for: 0.25, scheduler: DispatchQueue.main)
             .map { searchTerm -> Void  in
-                //self.isSearching = true
-                self.filterRecipes(searchTerm: searchTerm)
+                Task { await self.loadRecipes() }
             }
             .sink {}
             .store(in: &cancellables)
+    }
+    
+    private func loadRecipes() async {
+        NetworkManager().newFetchRecipes(url: URLS.recipeUrl)
+            .sink { data  in
+                self.filterRecipes(searchTerm: self.searchTerm)
+            } receiveValue: { recipes in
+                self.recipes = recipes
+            }.store(in: &cancellables)
+
     }
     
     func sortRecipesByCuisine()  {

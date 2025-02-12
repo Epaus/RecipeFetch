@@ -18,6 +18,7 @@ struct RecipeScrollView: View {
     private func loadRecipes() async {
         NetworkManager().newFetchRecipes(url: URLS.recipeUrl)
             .sink { data  in
+                recipeListViewModel.filterRecipes(searchTerm: recipeListViewModel.searchTerm)
             } receiveValue: { recipes in
                 self.recipeListViewModel.recipes = recipes
             }.store(in: &cancellables)
@@ -96,11 +97,9 @@ struct RecipeScrollView: View {
             .searchable(text: $recipeListViewModel.searchTerm)
             .onSubmit(of:.search){
 //                recipeListViewModel.filterRecipes(searchTerm: recipeListViewModel.searchTerm)
-                if recipeListViewModel.searchTerm.isEmpty && isSearching {
+                if isSearching {
                     Task { await loadRecipes() }
-                } else {
-                    recipeListViewModel.filterRecipes(searchTerm: recipeListViewModel.searchTerm)
-                }
+                } 
                 
             }
             .onChange(of: recipeListViewModel.searchTerm) {
