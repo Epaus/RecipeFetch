@@ -59,6 +59,13 @@
 			);
 			target = 1DB575EE2D499ADA0062A5D4 /* RecipeFetchUITests */;
 		};
+		1DE55C252D67E04B00AC26AE /* Exceptions for "RecipeFetchUITests" folder in "RecipeFetch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				RecipeFetchScrollViewTests.swift,
+			);
+			target = 1DB575D22D499AD90062A5D4 /* RecipeFetch */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -79,6 +86,7 @@
 		1DE55C202D67DA9900AC26AE /* RecipeFetchUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				1DE55C252D67E04B00AC26AE /* Exceptions for "RecipeFetchUITests" folder in "RecipeFetch" target */,
 				1DE55C242D67DAEE00AC26AE /* Exceptions for "RecipeFetchUITests" folder in "RecipeFetchUITests" target */,
 			);
 			path = RecipeFetchUITests;
