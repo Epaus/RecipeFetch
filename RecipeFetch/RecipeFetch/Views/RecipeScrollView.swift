@@ -16,7 +16,6 @@ struct RecipeScrollView: View {
     @State private var cancellables: Set<AnyCancellable> = []
     @Environment(\.isSearching) var isSearching
     
-   
     var body: some View {
         
         NavigationView {
@@ -46,7 +45,7 @@ struct RecipeScrollView: View {
                         .animation(.easeInOut, value: 0.3)
                         .padding(.vertical, 2)
                 } .task({
-                    await self.recipeListViewModel.loadRecipes()
+                    await self.recipeListViewModel.loadRecipes(url: URLS.recipeUrl!)
                 })
             } .frame(maxWidth: .infinity)
                 .padding(.top, 10)
@@ -90,13 +89,13 @@ struct RecipeScrollView: View {
             .searchable(text: $recipeListViewModel.searchTerm)
             .onSubmit(of:.search){
                 if isSearching {
-                    Task { await self.recipeListViewModel.loadRecipes() }
+                    Task { await self.recipeListViewModel.loadRecipes(url: URLS.recipeUrl!) }
                 }
                 
             }
             .onChange(of: recipeListViewModel.searchTerm) {
                 if recipeListViewModel.searchTerm.isEmpty && !isSearching {
-                    Task { await self.recipeListViewModel.loadRecipes() }
+                    Task { await self.recipeListViewModel.loadRecipes(url: URLS.recipeUrl!) }
                 }
                 
             }
@@ -114,14 +113,19 @@ struct RecipeCell: View {
     var body: some View {
         VStack {
             HStack (alignment: .top) {
-                AsyncCachedImage(url: recipe.photo_url_small) { image in
-                            image
-                                .resizable()
+                if recipe.smallPhotoString != "" {
+                    AsyncCachedImage(url: recipe.photo_url_small) { image in
+                                image
+                                    .resizable()
+                                    .frame(maxWidth: 100, maxHeight: 100)
+                            } placeholder: {
+                                ProgressView("Loading...")
                                 .frame(maxWidth: 100, maxHeight: 100)
-                        } placeholder: {
-                            ProgressView("Loading...")
-                            .frame(maxWidth: 100, maxHeight: 100)
-                        }.padding(.leading, 10)
+                            }.padding(.leading, 10)
+                } else {
+                    Image("food.pdf")
+                }
+               
                 
                 VStack  {
                     Text(recipe.name)

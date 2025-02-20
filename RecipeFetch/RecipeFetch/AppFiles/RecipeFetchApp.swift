@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct RecipeFetchApp: App {
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             

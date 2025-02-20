@@ -23,3 +23,4 @@ struct Recipe: Identifiable, Decodable, Hashable  {
     let source_url: String?
     let youtube_url: String?
 }
+

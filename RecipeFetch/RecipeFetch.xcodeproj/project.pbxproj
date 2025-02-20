@@ -29,15 +29,59 @@
 		1DB575EF2D499ADA0062A5D4 /* RecipeFetchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeFetchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1DE55C0D2D666BA500AC26AE /* Exceptions for "RecipeFetch" folder in "RecipeFetchTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/Recipe.swift,
+				Models/RecipeListViewModel.swift,
+				Models/RecipeViewModel.swift,
+				Network/MockNetworkManager.swift,
+				Utilities/Constants.swift,
+			);
+			target = 1DB575E42D499ADA0062A5D4 /* RecipeFetchTests */;
+		};
+		1DE55C1F2D67DA7000AC26AE /* Exceptions for "RecipeFetch" folder in "RecipeFetchUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/Recipe.swift,
+				Models/RecipeListViewModel.swift,
+				Models/RecipeViewModel.swift,
+				Network/MockNetworkManager.swift,
+				Utilities/Constants.swift,
+			);
+			target = 1DB575EE2D499ADA0062A5D4 /* RecipeFetchUITests */;
+		};
+		1DE55C242D67DAEE00AC26AE /* Exceptions for "RecipeFetchUITests" folder in "RecipeFetchUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				RecipeFetchScrollViewTests.swift,
+			);
+			target = 1DB575EE2D499ADA0062A5D4 /* RecipeFetchUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1DB575D52D499AD90062A5D4 /* RecipeFetch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1DE55C0D2D666BA500AC26AE /* Exceptions for "RecipeFetch" folder in "RecipeFetchTests" target */,
+				1DE55C1F2D67DA7000AC26AE /* Exceptions for "RecipeFetch" folder in "RecipeFetchUITests" target */,
+			);
 			path = RecipeFetch;
 			sourceTree = "<group>";
 		};
 		1DB575E82D499ADA0062A5D4 /* RecipeFetchTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = RecipeFetchTests;
+			sourceTree = "<group>";
+		};
+		1DE55C202D67DA9900AC26AE /* RecipeFetchUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1DE55C242D67DAEE00AC26AE /* Exceptions for "RecipeFetchUITests" folder in "RecipeFetchUITests" target */,
+			);
+			path = RecipeFetchUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -72,6 +116,7 @@
 			children = (
 				1DB575D52D499AD90062A5D4 /* RecipeFetch */,
 				1DB575E82D499ADA0062A5D4 /* RecipeFetchTests */,
+				1DE55C202D67DA9900AC26AE /* RecipeFetchUITests */,
 				1DB575D42D499AD90062A5D4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +148,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1DB575D52D499AD90062A5D4 /* RecipeFetch */,
+				1DE55C202D67DA9900AC26AE /* RecipeFetchUITests */,
 			);
 			name = RecipeFetch;
 			packageProductDependencies = (
@@ -406,6 +452,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "";
 			};
 			name = Debug;
 		};
@@ -446,11 +493,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SV69BK44Z9;
+				GCC_PREPROCESSOR_DEFINITIONS = "TEST=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "";
 				PRODUCT_BUNDLE_IDENTIFIER = paus.productions.llc.RecipeFetchTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "TEST DEBUG";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -468,6 +520,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = paus.productions.llc.RecipeFetchTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -483,13 +536,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SV69BK44Z9;
+				GCC_PREPROCESSOR_DEFINITIONS = "TEST=1";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = paus.productions.llc.RecipeFetchUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "TEST DEBUG";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "";
 				TEST_TARGET_NAME = RecipeFetch;
 			};
 			name = Debug;

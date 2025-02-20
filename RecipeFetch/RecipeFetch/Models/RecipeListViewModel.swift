@@ -15,19 +15,43 @@ class RecipeListViewModel: ObservableObject {
     @Published private var cancellables: Set<AnyCancellable> = []
     @Published var searchTerm: String = ""
  
+    private var networkManager = {
+        #if TEST
+        return MockNetworkManager()
+        #else
+        return NetworkManager()
+        #endif
+    }
     
     init() {
         $searchTerm
             //.debounce(for: 0.25, scheduler: DispatchQueue.main)
             .map { searchTerm -> Void  in
-                Task { await self.loadRecipes() }
+                Task { await self.initialLoad() }
             }
             .sink {}
             .store(in: &cancellables)
     }
     
-    func loadRecipes() async {
-        NetworkManager().fetchRecipes(url: URLS.recipeUrl)
+    func initialLoad() async {
+        
+        var recipeUrl: URL?
+        #if TEST
+        recipeUrl = nil
+        #else
+        recipeUrl = URLS.recipeUrl
+        #endif
+        
+        networkManager().fetchRecipes(url: recipeUrl)
+            .sink { data  in
+                self.filterRecipes(searchTerm: self.searchTerm)
+            } receiveValue: { recipes in
+                self.recipes = recipes
+            }.store(in: &cancellables)
+    }
+    
+    func loadRecipes(url: URL) async {
+        networkManager().fetchRecipes(url: url)
             .sink { data  in
                 self.filterRecipes(searchTerm: self.searchTerm)
             } receiveValue: { recipes in

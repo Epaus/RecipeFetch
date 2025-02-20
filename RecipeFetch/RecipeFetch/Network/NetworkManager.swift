@@ -21,6 +21,8 @@ enum HTTPError: LocalizedError {
     
 }
 
+
+
 class NetworkManager {
     
     func fetchRecipes(url: URL?) -> AnyPublisher<[RecipeViewModel], Error>  {
@@ -44,5 +46,7 @@ class NetworkManager {
             }
             .eraseToAnyPublisher()
     }
+    
+   
 }
 
