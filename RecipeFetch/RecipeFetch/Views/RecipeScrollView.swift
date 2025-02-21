@@ -123,7 +123,9 @@ struct RecipeCell: View {
                                 .frame(maxWidth: 100, maxHeight: 100)
                             }.padding(.leading, 10)
                 } else {
-                    Image("food.pdf")
+                    Image(uiImage: UIImage(named: "noRecipeImage.png") ?? UIImage()) .resizable()
+                                   .frame(maxWidth: 100, maxHeight: 100)
+
                 }
                
                 
