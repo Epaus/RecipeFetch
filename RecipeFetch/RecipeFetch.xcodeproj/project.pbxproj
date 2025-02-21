@@ -24,6 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D91FFDF2D69354B00FE7200 /* RecipeFetch.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RecipeFetch.xctestplan; sourceTree = "<group>"; };
 		1DB575D32D499AD90062A5D4 /* RecipeFetch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeFetch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB575E52D499ADA0062A5D4 /* RecipeFetchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeFetchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB575EF2D499ADA0062A5D4 /* RecipeFetchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeFetchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +123,7 @@
 		1DB575CA2D499AD90062A5D4 = {
 			isa = PBXGroup;
 			children = (
+				1D91FFDF2D69354B00FE7200 /* RecipeFetch.xctestplan */,
 				1DB575D52D499AD90062A5D4 /* RecipeFetch */,
 				1DB575E82D499ADA0062A5D4 /* RecipeFetchTests */,
 				1DE55C202D67DA9900AC26AE /* RecipeFetchUITests */,
@@ -372,7 +374,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;

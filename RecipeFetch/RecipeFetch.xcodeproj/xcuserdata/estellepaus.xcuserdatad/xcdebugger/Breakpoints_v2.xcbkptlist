@@ -169,6 +169,78 @@
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
+            <Locations>
+               <Location
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - f9311245cda056f6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in RecipeFetch.RecipeScrollView.body.getter : some"
+                  moduleName = "RecipeFetch.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92">
+               </Location>
+               <Location
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - 8eea3fd05960cdf1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () async -&gt; () in closure #2 () -&gt; () in RecipeFetch.RecipeScrollView.body.getter : some"
+                  moduleName = "RecipeFetch.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92">
+               </Location>
+               <Location
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - 45afb4d154be8710"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in closure #2 () -&gt; () in RecipeFetch.RecipeScrollView.body.getter : some"
+                  moduleName = "RecipeFetch.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92">
+               </Location>
+               <Location
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - e9bd37ed3617e205"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 () async -&gt; () in closure #2 () -&gt; () in RecipeFetch.RecipeScrollView.body.getter : some"
+                  moduleName = "RecipeFetch.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92">
+               </Location>
+               <Location
+                  uuid = "03C4907C-44A1-40C5-9511-3187BE2687E5 - f4519f2dc4b47b1e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in closure #2 () -&gt; () in RecipeFetch.RecipeScrollView.body.getter : some"
+                  moduleName = "RecipeFetch.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetch/Views/RecipeScrollView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -206,22 +278,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5B17C124-EBDC-46C4-BDD2-A16B51706B64"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RecipeFetch/Models/RecipeListViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "networkManager"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "8B8396EA-59B4-47C7-AFA5-5FE7E579DEBD"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -239,7 +295,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "289A58D2-6728-49CB-A2DE-B5FDD4655580"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RecipeFetch/Models/RecipeListViewModel.swift"
@@ -249,6 +305,114 @@
             endingLineNumber = "45"
             landmarkName = "initialLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2D6AD536-CC19-4926-BAEF-C3DE4F0D7186"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RecipeFetch/Models/RecipeListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "initialLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "25EE3A76-0AF7-447D-996B-FA3E5A775086"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RecipeFetch/Models/RecipeListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "initialLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "487A5CD7-00DE-4DF4-8EB3-BA24FBE4D457"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RecipeFetchTests/RecipeListViewModelTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "test_sortRecipesByName()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "487A5CD7-00DE-4DF4-8EB3-BA24FBE4D457 - 112f1f81be4d2d7f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for RecipeFetchTests.RecipeListViewModelTests.test_sortRecipesByName() async -&gt; ()"
+                  moduleName = "RecipeFetchTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetchTests/RecipeListViewModelTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62">
+               </Location>
+               <Location
+                  uuid = "487A5CD7-00DE-4DF4-8EB3-BA24FBE4D457 - f9bf58b8e3188b7e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for RecipeFetchTests.RecipeListViewModelTests.test_sortRecipesByName() async -&gt; ()"
+                  moduleName = "RecipeFetchTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetchTests/RecipeListViewModelTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62">
+               </Location>
+               <Location
+                  uuid = "487A5CD7-00DE-4DF4-8EB3-BA24FBE4D457 - 60c085afd4a7e979"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for RecipeFetchTests.RecipeListViewModelTests.test_sortRecipesByName() async -&gt; ()"
+                  moduleName = "RecipeFetchTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/estellepaus/Documents/Projects/RecipeFetch/RecipeFetch/RecipeFetchTests/RecipeListViewModelTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "95C29CAD-B077-4B53-B780-8EDFDAC71A0A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RecipeFetch/Models/RecipeListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "networkManager"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
