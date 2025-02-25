@@ -32,9 +32,10 @@ struct RecipeScrollView: View {
                         recipeListViewModel.searchTerm = ""
                         isSearchBarFocused = false // Dismiss the keyboard
                     }.foregroundStyle(.teal)
+                        .padding(.trailing, 20)
 
                 }
-                .padding()
+              
                 ScrollView {
                     if recipeListViewModel.recipes.count == 0 {
                         Text("No recipes found. Try again later.")
