@@ -4,11 +4,8 @@
 <dict>
 	<key>UILaunchScreen</key>
 	<dict>
-		<key>UILaunchScreen</key>
-		<dict>
-			<key>Launch Screen Interface File Base Name</key>
-			<string>Launch Screen.storyboard</string>
-		</dict>
+		<key>Launch Screen Interface File Base Name</key>
+		<string>Launch Screen</string>
 	</dict>
 </dict>
 </plist>
