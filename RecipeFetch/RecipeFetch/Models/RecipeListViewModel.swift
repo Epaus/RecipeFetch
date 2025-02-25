@@ -14,6 +14,9 @@ class RecipeListViewModel: ObservableObject {
     @Published var recipes = [RecipeViewModel]()
     @Published private var cancellables: Set<AnyCancellable> = []
     @Published var searchTerm: String = ""
+    
+    @Published var showAlert = false
+    @Published var alertMessage = ""
  
     private var networkManager = {
         #if TEST
@@ -27,37 +30,64 @@ class RecipeListViewModel: ObservableObject {
         $searchTerm
             //.debounce(for: 0.25, scheduler: DispatchQueue.main)
             .map { searchTerm -> Void  in
-                Task { await self.initialLoad() }
+                Task { try? await self.initialLoad() }
             }
             .sink {}
             .store(in: &cancellables)
     }
     
-    func initialLoad() async {
-        
-        var recipeUrl: URL?
-        #if TEST
-        recipeUrl = nil
-        #else
-        recipeUrl = URLS.recipeUrl
-        #endif
-        
-        networkManager().fetchRecipes(url: recipeUrl)
-            .sink { data  in
-                self.filterRecipes(searchTerm: self.searchTerm)
-            } receiveValue: { recipes in
-                self.recipes = recipes
-            }.store(in: &cancellables)
+  
+    
+    func loadRecipes() {
+        Task {
+                    do {
+                        try await initialLoad() // Call your async method here
+                    } catch {
+                        //alertMessage = "Failed to load recipes: \(error.localizedDescription)"
+                        showAlert = true
+                    }
+                }
     }
     
-    func loadRecipes(url: URL) async {
-        networkManager().fetchRecipes(url: url)
-            .sink { data  in
-                self.filterRecipes(searchTerm: self.searchTerm)
-            } receiveValue: { recipes in
+    func initialLoad() async throws {
+        
+        var recipeUrl: URL?
+#if TEST
+        recipeUrl = nil
+#else
+        recipeUrl = URLS.recipeUrl
+#endif
+        
+        networkManager().fetchRecipes(url: recipeUrl)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    if let recipeError = error as? RecipeError {
+                        switch recipeError {
+                        case .missingField(let incompleteRecipe):
+                            self.alertMessage = "There is a problem.\n \(incompleteRecipe).\n Please try again later."
+                        }
+                    }
+                    self.showAlert = true
+                }
+            }, receiveValue: { recipes in
                 self.recipes = recipes
-            }.store(in: &cancellables)
+                self.filterRecipes(searchTerm: self.searchTerm)
+            })
+            .store(in: &cancellables)
     }
+    
+    
+//    func loadRecipes(url: URL) async {
+//        networkManager().fetchRecipes(url: url)
+//            .sink { data  in
+//                self.filterRecipes(searchTerm: self.searchTerm)
+//            } receiveValue: { recipes in
+//                self.recipes = recipes
+//            }.store(in: &cancellables)
+//    }
     
     func sortRecipesByCuisine()  {
         self.recipes = recipes.sorted { $0.cuisine < $1.cuisine }

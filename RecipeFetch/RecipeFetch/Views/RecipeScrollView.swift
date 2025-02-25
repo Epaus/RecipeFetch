@@ -8,8 +8,6 @@
 import SwiftUI
 import Combine
 
-
-
 struct RecipeScrollView: View {
     @State private var selectedCells: Set<RecipeViewModel> = []
     @StateObject private var recipeListViewModel = RecipeListViewModel()
@@ -17,36 +15,31 @@ struct RecipeScrollView: View {
     @Environment(\.isSearching) var isSearching
     
     var body: some View {
-        
         NavigationView {
             
             ScrollView {
+                if recipeListViewModel.recipes.count == 0 {
+                    Text("No recipes found. Try again later.")
+                        .foregroundStyle(.red)
+                }
+                
                 ForEach(recipeListViewModel.recipes, id: \.uuid) { recipe in
                     RecipeCell(recipe: recipe, isExpanded: self.selectedCells.contains(recipe))
                         .modifier(ScrollCell())
                         .onTapGesture {
                             
                             if self.selectedCells.contains(recipe) {
-                                
-                                self.selectedCells.forEach( { cell in
-                                    print(cell.name)
-                                })
-                                print("selectedCells.count = \(self.selectedCells.count)")
                                 self.selectedCells.remove(recipe)
                             } else {
-                                
                                 self.selectedCells.insert(recipe)
-                                self.selectedCells.forEach( { cell in
-                                    print(cell.name)
-                                })
-                                print("selectedCells.count = \(self.selectedCells.count)")
                             }
                         }
                         .animation(.easeInOut, value: 0.3)
                         .padding(.vertical, 2)
                 } .task({
-                    await self.recipeListViewModel.loadRecipes(url: URLS.recipeUrl!)
+                    recipeListViewModel.loadRecipes()
                 })
+                
             } .frame(maxWidth: .infinity)
                 .padding(.top, 10)
                 .toolbar {
@@ -58,7 +51,6 @@ struct RecipeScrollView: View {
                         }
                         Button {
                             recipeListViewModel.sortRecipesByCuisine()
-                            print("sorted by cuisine button tapped")
                         } label: {
                             Label("Cuisine", systemImage: "flag.circle")
                         }
@@ -83,114 +75,22 @@ struct RecipeScrollView: View {
 
                     Spacer()
                     
-                }
-            
-        } .navigationBarTitle("Recipe Fetch", displayMode: .large)
-            .searchable(text: $recipeListViewModel.searchTerm)
-            .onSubmit(of:.search){
-                if isSearching {
-                    Task { await self.recipeListViewModel.loadRecipes(url: URLS.recipeUrl!) }
-                }
-                
-            }
-            .onChange(of: recipeListViewModel.searchTerm) {
-                if recipeListViewModel.searchTerm.isEmpty && !isSearching {
-                    Task { await self.recipeListViewModel.loadRecipes(url: URLS.recipeUrl!) }
-                }
-                
-            }
-    }
-           
-}
-
-struct RecipeCell: View {
-    
-    let recipe: RecipeViewModel
-    let isExpanded: Bool
-    
-    @Environment(\.openURL) private var openURL
-   
-    var body: some View {
-        VStack {
-            HStack (alignment: .top) {
-                if recipe.smallPhotoString != "" {
-                    AsyncCachedImage(url: recipe.photo_url_small) { image in
-                                image
-                                    .resizable()
-                                    .frame(maxWidth: 100, maxHeight: 100)
-                            } placeholder: {
-                                ProgressView("Loading...")
-                                .frame(maxWidth: 100, maxHeight: 100)
-                            }.padding(.leading, 10)
-                } else {
-                    Image(uiImage: UIImage(named: "noRecipeImage.png") ?? UIImage()) .resizable()
-                                   .frame(maxWidth: 100, maxHeight: 100)
-
-                }
-               
-                
-                VStack  {
-                    Text(recipe.name)
-                        .font(.headline)
-                        .frame(maxWidth: UIScreen.main.bounds.width * 0.8, maxHeight: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(nil)
-                    
-                    Text(recipe.cuisine)
-                        .frame(maxWidth: .infinity, maxHeight: 20.0, alignment: .leading)
-                        .italic()
-                    Spacer()
-                }
-                Spacer()
-                
-                Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                    .padding(.trailing, 16)
-            } .contentShape(Rectangle())
-                .navigationTitle("Recipe Fetch")
-            
-            if isExpanded {
-                Spacer()
-                HStack(spacing: UIScreen.main.bounds.width * 0.30) {
-                    let hasRecipeSource = recipe.sourceURL != nil
-                    if hasRecipeSource {
-                        Button("Go to recipe") {
-                            openURL(recipe.sourceURL!)
-                        }.padding(.leading, 10)
-                    } else {
-                        Button("Go to recipe") {
-                        }.disabled(!hasRecipeSource)
+                }.navigationBarTitle("Recipe Fetch", displayMode: .large)
+                .searchable(text: $recipeListViewModel.searchTerm)
+                .onSubmit(of:.search){
+                    if isSearching {
+                        Task { self.recipeListViewModel.loadRecipes() }
                     }
-                    
-                    if recipe.youTubeURL != nil {
-                        Button(action: {
-                            openURL(recipe.youTubeURL!)
-                        }){
-                            PlayVideoImage()
-                        }.buttonStyle(PlainButtonStyle())
-                            .frame(maxWidth: 50.0, maxHeight: 50.0, alignment: .trailing)
-                            .padding(.trailing, 10)
-                    } else {
-                        Button(action: {}){
-                            PlayVideoImage()
-                        }.buttonStyle(PlainButtonStyle())
-                            .frame(maxWidth: 50.0, maxHeight: 50.0, alignment: .trailing)
-                            .padding(.trailing, 10).disabled(true)
-                    }
-                    
                 }
-                
-            }
+                .onChange(of: recipeListViewModel.searchTerm) {
+                    if recipeListViewModel.searchTerm.isEmpty && !isSearching {
+                        Task { recipeListViewModel.loadRecipes() }
+                    }
+                }
+                .alert(isPresented: $recipeListViewModel.showAlert) {
+                    Alert(title: Text("Error"), message: Text(recipeListViewModel.alertMessage), dismissButton: .default(Text("OK")))
+                }
         }
-    }
-}
-
-struct PlayVideoImage: View {
-    var body: some View {
-        Image(systemName: "play.fill")
-            .frame(width: 55, height: 35)
-            .foregroundColor(Color.white)
-            .background(Color.red)
-            .clipShape(RoundedRectangle(cornerRadius: 8.0))
     }
 }
 
@@ -202,6 +102,7 @@ struct ScrollCell: ViewModifier {
         }
     }
 }
+
 
 #Preview {
     RecipeScrollView()

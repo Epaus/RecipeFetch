@@ -30,7 +30,7 @@ final class RecipeListViewModelTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Load recipes")
         viewModel = await RecipeListViewModel()
     
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
         let count = await viewModel.recipes.count
         if count > 1 {
             expectation.fulfill()
@@ -45,7 +45,7 @@ final class RecipeListViewModelTests: XCTestCase {
     
         viewModel = await RecipeListViewModel()
     
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
 
         var firstRecipeCuisine = await viewModel.recipes.first?.cuisine  ?? ""
         XCTAssertTrue(firstRecipeCuisine == "Malaysian")
@@ -58,7 +58,7 @@ final class RecipeListViewModelTests: XCTestCase {
     func test_sortRecipesByName() async {
         viewModel = await RecipeListViewModel()
     
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
         var firstRecipeName = await viewModel.recipes.first?.name  ?? ""
         XCTAssertTrue(firstRecipeName == "Apam Balik")
        
@@ -76,7 +76,7 @@ final class RecipeListViewModelTests: XCTestCase {
     func test_sortByHasRecipe() async {
         viewModel = await RecipeListViewModel()
     
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
        
         let firstRecipeName = await viewModel.recipes.first?.name  ?? ""
         XCTAssertTrue(firstRecipeName == "Apam Balik")
@@ -98,7 +98,7 @@ final class RecipeListViewModelTests: XCTestCase {
     func test_sortByHasVideo() async {
         viewModel = await RecipeListViewModel()
     
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
         let firstRecipeName = await viewModel.recipes.first?.name  ?? ""
        
         XCTAssertTrue(firstRecipeName == "Apam Balik")
@@ -108,7 +108,7 @@ final class RecipeListViewModelTests: XCTestCase {
         XCTAssertTrue(firstRecipeHasVideo)
         XCTAssertTrue(lastRecipeHasVideo)
         
-        await viewModel.sortRecipesByHasRecipe()
+        try? await viewModel.sortRecipesByHasRecipe()
         
         firstRecipeHasVideo = await viewModel.recipes.first?.source_url != ""
         lastRecipeHasVideo = await viewModel.recipes.last?.source_url != ""
@@ -119,7 +119,7 @@ final class RecipeListViewModelTests: XCTestCase {
     
     func test_searchTerm_wholeWord_filterRecipes() async {
         viewModel = await RecipeListViewModel()
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
         
         let searchTerm = "apple"
         await viewModel.filterRecipes(searchTerm: searchTerm)
@@ -130,7 +130,7 @@ final class RecipeListViewModelTests: XCTestCase {
     
     func test_emptyString_FilterRemovesNoRecipes() async {
         viewModel = await RecipeListViewModel()
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
         
         let searchTerm = ""
         await viewModel.filterRecipes(searchTerm: searchTerm)
@@ -141,7 +141,7 @@ final class RecipeListViewModelTests: XCTestCase {
     
     func test_searchTermString_filterRecipes() async {
         viewModel = await RecipeListViewModel()
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
         
         let searchTerm = "ip"
         await viewModel.filterRecipes(searchTerm: searchTerm)
@@ -152,7 +152,7 @@ final class RecipeListViewModelTests: XCTestCase {
     
     func test_searchStringNotFound_filterRecipes() async {
         viewModel = await RecipeListViewModel()
-        await viewModel.initialLoad()
+        try? await viewModel.initialLoad()
         
         let searchTerm = "zz"
         await viewModel.filterRecipes(searchTerm: searchTerm)

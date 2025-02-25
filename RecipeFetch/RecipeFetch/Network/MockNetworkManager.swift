@@ -13,7 +13,6 @@ class MockNetworkManager {
     @Published private var cancellables: Set<AnyCancellable> = []
     
     func fetchRecipes(url: URL?) -> AnyPublisher<[RecipeViewModel], Error>  {
-         print("fetchingRecipes with MockNetworkManager")
         
          let recipe1 = RecipeViewModel(recipe: Recipe(cuisine: "Malaysian", name: "Apam Balik", photo_url_large: nil, photo_url_small: nil, uuid: "0c6ca6e7-e32a-4053-b824-1dbf749910d8", source_url: "https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ", youtube_url: "https://www.youtube.com/watch?v=6R8ffRRJcrg"))
          
@@ -45,8 +44,8 @@ class MockNetworkManager {
      
     func mockRecipesPublisher(recipes: [RecipeViewModel]) -> AnyPublisher<[RecipeViewModel], Error> {
         return Just(recipes)
-            .setFailureType(to: Error.self) // Set the failure type to Error
-            .eraseToAnyPublisher() // Erase to AnyPublisher
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher() 
     }
   
   
