@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 @MainActor
 class RecipeListViewModel: ObservableObject {
@@ -14,9 +15,29 @@ class RecipeListViewModel: ObservableObject {
     @Published var recipes = [RecipeViewModel]()
     @Published private var cancellables: Set<AnyCancellable> = []
     @Published var searchTerm: String = ""
-    
+    @Published var isLoading = true
     @Published var showAlert = false
     @Published var alertMessage = ""
+    
+    let title = "Recipe Fetch"
+    let progressViewTitle = "Loading recipes..."
+    let noRecipesFound = "No recipes found. Try again later."
+    let menuName = "Name"
+    let menuNameImage = "scribble"
+    let menuCuisine = "Cuisine"
+    let menuCuisineImage = "flag.circle"
+    let menuIncludesLink = "Includes recipe link"
+    let menuIncludesLinkImage = "list.clipboard"
+    let menuIncludesVideoLink = "Includes video link"
+    let menuIncludesVideoLinkImage = "video.circle"
+    let sortItem = "Sort"
+    let sortImage = "filter"
+    var errorTitle = "Error"
+    let okTitle = "OK"
+    let appColor = Color.teal
+    let searchPlaceholderText = "Search"
+    let cancelSearchText = "Cancel"
+    
  
     private var networkManager = {
         #if TEST
@@ -75,6 +96,7 @@ class RecipeListViewModel: ObservableObject {
             }, receiveValue: { recipes in
                 self.recipes = recipes
                 self.filterRecipes(searchTerm: self.searchTerm)
+                self.isLoading = false
             })
             .store(in: &cancellables)
     }

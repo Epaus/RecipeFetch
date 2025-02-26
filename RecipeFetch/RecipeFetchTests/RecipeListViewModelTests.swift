@@ -6,7 +6,7 @@
 //
 
 import XCTest
-
+import SwiftUI
 
 final class RecipeListViewModelTests: XCTestCase {
     
@@ -24,6 +24,27 @@ final class RecipeListViewModelTests: XCTestCase {
     func test_viewModel_exists() async throws {
         viewModel = await RecipeListViewModel()
         XCTAssertNotNil(viewModel)
+    }
+    
+    func test_viewModelTextStrings() async {
+        viewModel = await RecipeListViewModel()
+        
+        XCTAssertEqual(viewModel.title, "Recipe Fetch")
+        XCTAssertEqual(viewModel.progressViewTitle, "Loading recipes...")
+        XCTAssertEqual(viewModel.menuName, "Name")
+        XCTAssertEqual(viewModel.menuNameImage,"scribble")
+        XCTAssertEqual(viewModel.menuCuisine, "Cuisine")
+        XCTAssertEqual(viewModel.menuCuisineImage, "flag.circle")
+        XCTAssertEqual(viewModel.menuIncludesLink, "Includes recipe link")
+        XCTAssertEqual(viewModel.menuIncludesLinkImage, "list.clipboard")
+        XCTAssertEqual(viewModel.menuIncludesVideoLink, "Includes video link")
+        XCTAssertEqual(viewModel.menuIncludesVideoLinkImage, "video.circle")
+        XCTAssertEqual(viewModel.sortItem, "Sort")
+        XCTAssertEqual(viewModel.sortImage, "filter")
+        XCTAssertEqual(viewModel.okTitle, "OK")
+        XCTAssertEqual(viewModel.appColor, Color.teal)
+        XCTAssertEqual(viewModel.searchPlaceholderText, "Search")
+        XCTAssertEqual(viewModel.cancelSearchText, "Cancel")
     }
     
     func test_loadRecipes() async {
@@ -161,6 +182,6 @@ final class RecipeListViewModelTests: XCTestCase {
         XCTAssertTrue(count == 0)
     }
 
-   
+  
 
 }
