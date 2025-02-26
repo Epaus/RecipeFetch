@@ -8,9 +8,9 @@ Coding challenge - A recipe app that displays downloaded recipes
 
 ![](Images/RecipeFetch3.PNG )
 
-![](Images/RecipeFetch5.PNG )
-![](Images/RecipeFetch6.PNG )
-![](Images/RecipeFetch7.PNG )
+![](Images/RecipeFetc5.PNG )
+![](Images/RecipeFetc6.PNG )
+![](Images/RecipeFetc7.PNG )
 #### Also includes: 
 * image caching
 * unit tests
