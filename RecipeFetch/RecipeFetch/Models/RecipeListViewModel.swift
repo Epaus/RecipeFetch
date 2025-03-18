@@ -101,16 +101,6 @@ class RecipeListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    
-//    func loadRecipes(url: URL) async {
-//        networkManager().fetchRecipes(url: url)
-//            .sink { data  in
-//                self.filterRecipes(searchTerm: self.searchTerm)
-//            } receiveValue: { recipes in
-//                self.recipes = recipes
-//            }.store(in: &cancellables)
-//    }
-    
     func sortRecipesByCuisine()  {
         self.recipes = recipes.sorted { $0.cuisine < $1.cuisine }
     }

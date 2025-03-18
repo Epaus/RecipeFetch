@@ -182,6 +182,4 @@ final class RecipeListViewModelTests: XCTestCase {
         XCTAssertTrue(count == 0)
     }
 
-  
-
 }
