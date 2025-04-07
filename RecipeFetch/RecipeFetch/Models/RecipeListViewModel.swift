@@ -62,9 +62,8 @@ class RecipeListViewModel: ObservableObject {
     func loadRecipes() {
         Task {
                     do {
-                        try await initialLoad() // Call your async method here
+                        try await initialLoad()
                     } catch {
-                        //alertMessage = "Failed to load recipes: \(error.localizedDescription)"
                         showAlert = true
                     }
                 }
